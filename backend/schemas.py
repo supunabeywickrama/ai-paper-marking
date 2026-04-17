@@ -71,3 +71,18 @@ class DashboardStats(BaseModel):
     on_time_count: int
     late_count: int
     rejected_count: int
+
+class StudentBase(BaseModel):
+    name: str
+    email: str
+    student_id: str
+    language_preference: str
+
+class StudentCreate(StudentBase):
+    pass
+
+class StudentResponse(StudentBase):
+    id: UUID
+    created_at: datetime
+
+    model_config = ConfigDict(from_attributes=True)

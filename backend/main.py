@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 import os
 
 from backend.database import engine
+from backend.routes import students, exams, upload
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -31,3 +32,7 @@ app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 @app.get("/")
 async def root():
     return {"message": "Welcome to AI Paper Marking API"}
+
+app.include_router(students.router)
+app.include_router(exams.router)
+app.include_router(upload.router)
