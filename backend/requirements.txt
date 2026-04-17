@@ -1,4 +1,15 @@
 fastapi
-uvicorn
+uvicorn[standard]
 python-multipart
 pydantic
+pydantic-settings
+sqlalchemy[asyncio]
+asyncpg
+alembic
+openai
+opencv-python-headless
+Pillow
+PyMuPDF
+reportlab
+python-dotenv
+aiofiles
