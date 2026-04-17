@@ -5,7 +5,7 @@ from fastapi.staticfiles import StaticFiles
 import os
 
 from backend.database import engine
-from backend.routes import students, exams, upload
+from backend.routes import students, exams, upload, rankings, submissions, dashboard
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -36,3 +36,6 @@ async def root():
 app.include_router(students.router)
 app.include_router(exams.router)
 app.include_router(upload.router)
+app.include_router(rankings.router)
+app.include_router(submissions.router)
+app.include_router(dashboard.router)

@@ -9,13 +9,11 @@ from backend.database import get_db
 from backend.models import Submission, Exam, Student
 from backend.schemas import SubmissionResponse
 from backend.services.time_validator import validate_submission_time
+from backend.services.pipeline import process_submission
 from backend.config import settings
 
 router = APIRouter(prefix="/api/upload", tags=["upload"])
 
-async def mock_background_process(submission_id: UUID):
-    # This will be replaced by the actual pipeline in Phase 7
-    pass
 
 @router.post("", response_model=SubmissionResponse)
 async def upload_paper(
@@ -75,6 +73,6 @@ async def upload_paper(
     await db.refresh(new_submission)
     
     # Trigger background pipeline
-    background_tasks.add_task(mock_background_process, new_submission.id)
+    background_tasks.add_task(process_submission, new_submission.id)
     
     return new_submission
