@@ -5,13 +5,14 @@ from fastapi.staticfiles import StaticFiles
 import os
 
 from backend.database import engine
+from backend.models import Base
 from backend.routes import students, exams, upload, rankings, submissions, dashboard
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: ensure we can connect to DB or handle other startup tasks
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
     yield
-    # Shutdown: dispose the DB engine
     await engine.dispose()
 
 app = FastAPI(title="AI Paper Marking API", lifespan=lifespan)

@@ -6,6 +6,8 @@ uploads/
 .env
 *.log
 
+.env
+
 
 
 

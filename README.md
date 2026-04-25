@@ -135,19 +135,21 @@ ai-paper-marking/
 See [user_manual.md](user_manual.md) for full setup and usage instructions.
 
 ```bash
-# 1. Start the database
+# 1. Start the database (project root)
 docker compose up -d
 
-# 2. Start the backend
-cd backend
-pip install -r requirements.txt
-uvicorn backend.main:app --reload
+# 2. Install backend deps and start API (stay in project root after activating venv)
+cd backend && pip install -r requirements.txt
+cd ..
+backend\venv\Scripts\Activate.ps1   # Windows PowerShell
+# source backend/venv/bin/activate  # macOS / Linux
+uvicorn backend.main:app --reload --port 8000
 
-# 3. Start the frontend (new terminal)
-cd frontend
-npm install
-npm run dev
+# 3. Start the frontend (new terminal, from project root)
+cd frontend && npm install && npm run dev
 ```
+
+> `uvicorn` must run from the **project root** (`ai-paper-marking/`), not from inside `backend/`. All internal imports use the `backend.` package prefix.
 
 Open [http://localhost:3000](http://localhost:3000).
 

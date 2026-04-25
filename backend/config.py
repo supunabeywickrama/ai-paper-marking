@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     openai_api_key: str = "your_openai_api_key_here"
-    database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/aipapermarking"
+    database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5433/aipapermarking"
     smtp_server: str = "smtp.gmail.com"
     smtp_port: int = 587
     smtp_username: str = "your_email@gmail.com"

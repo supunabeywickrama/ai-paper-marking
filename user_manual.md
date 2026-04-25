@@ -60,12 +60,39 @@ UPLOAD_DIR=./uploads
 
 > **Gmail App Password:** Go to Google Account → Security → 2-Step Verification → App Passwords. Generate a password for "Mail". Use that 16-character password as `SMTP_PASSWORD`.
 
-### 2.3 Install Backend Dependencies
+### 2.3 Set Up Backend Virtual Environment & Install Dependencies
 
+**Create and activate a virtual environment:**
+
+On **macOS / Linux**:
 ```bash
 cd backend
+python3 -m venv venv
+source venv/bin/activate
+```
+
+On **Windows** (Command Prompt):
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\activate
+```
+
+On **Windows** (PowerShell):
+```bash
+cd backend
+python -m venv venv
+venv\Scripts\Activate.ps1
+```
+
+> **Note:** If you get an execution policy error on Windows PowerShell, run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+**Install dependencies:**
+```bash
 pip install -r requirements.txt
 ```
+
+> **Deactivate:** When finished, deactivate the virtual environment with `deactivate`
 
 ### 2.4 Install Frontend Dependencies
 
@@ -88,11 +115,24 @@ docker compose up -d
 This starts PostgreSQL on port `5433`. Data persists across restarts via a Docker volume.
 
 **Terminal 2 — Backend API**
-```bash
-cd backend
+
+Activate the virtual environment, then run uvicorn **from the project root** (the `backend.` prefix requires the project root to be in `sys.path`):
+
+On **Windows** (PowerShell):
+```powershell
+backend\venv\Scripts\Activate.ps1
 uvicorn backend.main:app --reload --port 8000
 ```
+
+On **macOS / Linux**:
+```bash
+source backend/venv/bin/activate
+uvicorn backend.main:app --reload --port 8000
+```
+
 The API will be available at `http://localhost:8000`. Interactive API docs at `http://localhost:8000/docs`.
+
+> **Common mistake:** Do not `cd backend` before running uvicorn. All internal imports use the `backend.` prefix, so the working directory must be the project root (`ai-paper-marking/`).
 
 **Terminal 3 — Frontend**
 ```bash
