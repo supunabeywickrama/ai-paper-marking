@@ -43,12 +43,22 @@ class SubmissionResponse(SubmissionBase):
 class EvaluationResponse(BaseModel):
     id: UUID
     question_number: int
+    question_part: Optional[str] = None
     marks_awarded: float
     max_marks: float
     feedback: Optional[str] = None
     correct_answer: Optional[str] = None
     evaluation_type: str
     detailed_reasoning: Optional[Dict[str, Any]] = None
+
+    model_config = ConfigDict(from_attributes=True)
+
+class GeneratedPDFResponse(BaseModel):
+    id: UUID
+    submission_id: UUID
+    pdf_type: str
+    file_path: str
+    generated_at: datetime
 
     model_config = ConfigDict(from_attributes=True)
 

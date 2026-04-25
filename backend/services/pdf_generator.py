@@ -27,7 +27,7 @@ async def create_clean_pdf(output_path: str, extracted_contents: list[ExtractedC
         y_offset -= 20
         
         # Handle long text wrapping (simplified for this orchestrator)
-        text = str(content.raw_extracted) if content.raw_extracted else "[Visual Element]"
+        text = str(content.reconstructed_text or content.raw_extracted or "[Visual Element]")
         chunks = [text[i:i+80] for i in range(0, len(text), 80)]
         for chunk in chunks:
             c.drawString(70, y_offset, chunk)

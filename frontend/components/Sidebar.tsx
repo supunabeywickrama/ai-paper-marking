@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Home, FileText, Upload, Settings } from 'lucide-react';
+import { Home, FileText, Upload, ClipboardList, Settings } from 'lucide-react';
 
 export default function Sidebar() {
   return (
@@ -17,6 +17,9 @@ export default function Sidebar() {
         </Link>
         <Link href="/upload" className="flex items-center gap-3 px-3 py-2.5 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors font-medium">
           <Upload size={18} /> Upload Paper
+        </Link>
+        <Link href="/submissions" className="flex items-center gap-3 px-3 py-2.5 text-gray-700 rounded-lg hover:bg-blue-50 hover:text-blue-700 transition-colors font-medium">
+          <ClipboardList size={18} /> Submissions
         </Link>
       </nav>
       <div className="p-4 border-t border-gray-100">
